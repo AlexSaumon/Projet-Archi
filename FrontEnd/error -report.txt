@@ -1,0 +1,42 @@
+Email Input: sophie.bluel@test.tld login.js:18:13
+Password Input: S0phie login.js:19:13
+Payload to API: 
+Object { formMail: "sophie.bluel@test.tld", formMdp: "S0phie" }
+​
+formMail: "sophie.bluel@test.tld"
+​
+formMdp: "S0phie"
+​
+<prototype>: Object { … }
+​​
+__defineGetter__: function __defineGetter__()
+​​
+__defineSetter__: function __defineSetter__()
+​​
+__lookupGetter__: function __lookupGetter__()
+​​
+__lookupSetter__: function __lookupSetter__()
+​​
+__proto__: 
+​​
+constructor: function Object()
+​​
+hasOwnProperty: function hasOwnProperty()
+​​
+isPrototypeOf: function isPrototypeOf()
+​​
+propertyIsEnumerable: function propertyIsEnumerable()
+​​
+toLocaleString: function toLocaleString()
+​​
+toString: function toString()
+​​
+valueOf: function valueOf()
+​​
+<get __proto__()>: function __proto__()
+​​
+<set __proto__()>: function __proto__()
+connexion.js:9:17
+Blocage d’une requête multiorigine (Cross-Origin Request) : la politique « Same Origin » ne permet pas de consulter la ressource distante située sur http://localhost:5678/api/users/login. Raison : échec de la requête CORS. Code d’état : (null).
+
+Erreur de connexion : TypeError: NetworkError when attempting to fetch resource. connexion.js:28:17
