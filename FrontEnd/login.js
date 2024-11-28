@@ -1,21 +1,21 @@
-//import {ajoutListenerMotdepasse} from "./connexion.js";
-
-//ajoutListenerMotdepasse();
+import {ajoutListenerMotdepasse} from "./connexion.js";
 
 const form = document.getElementById('log');
 const mail_input = document.getElementById('mail');
 const password_input = document.getElementById('password');
 const error_message = document.getElementById('erreur-message');
 
+
 form.addEventListener('submit', (e) => {
     error_message.innerText = "";
+        // réinitialise ka fonction de submit quand il y a des érreurs
+        e.preventDefault()
     clearErrorStyles();
     const errors = getLoginFormErrors (mail_input.value, password_input.value)
     if(errors.length > 0){
-        // réinitialise ka fonction de submit quand il y a des érreurs
-        e.preventDefault()
         error_message.innerText = errors.join(". ")
     }
+    ajoutListenerMotdepasse(mail_input.value, password_input.value);
 })
 
 function getLoginFormErrors (formmail, formpassword){
@@ -35,6 +35,3 @@ function clearErrorStyles() {
     mail_input.parentElement.classList.remove("Incorrect");
     password_input.parentElement.classList.remove("Incorrect");
 }
-
-
-
