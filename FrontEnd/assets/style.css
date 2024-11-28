@@ -224,36 +224,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-/** ci dessous ccs pour login.html**/
-
-.login {
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-}
-
-.form {
-	display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-	gap: 25px;
-}
-
-.form input {
-	border: #1D6154;
-	width: 379px;
-	height: 51px;
-	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.1));;
-}
-
-.saisie {
-	display: flex;
-	gap: 5px;
-	flex-direction: column;
-}
-
-.login a{
-	color: rgb(0, 0, 0);
-}

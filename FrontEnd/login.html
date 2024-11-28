@@ -9,8 +9,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/login.css">
-	<script type="module" src="Project.js"></script>
-
+	<script type="text/javascript" src="login.js" defer></script> <!-- Defer permet de "retarder" le script 
+	pour qu'il se lande après le html-->
 </head>
 <body>
 <header>
@@ -27,18 +27,19 @@
 <main>
     <section class="login">
         <h2>Log in</h2>
-        <div class="form">
+        <form id="log"class="form">
             <div class="saisie">
-                <p>E-mail</p>
-                <input id="Form" name= "recherche" required>
+                <label>E-mail</label>
+                <input type="email" id="mail" name= "for-mail" >
             </div>
             <div class="saisie">
-                <p>Mot de passe</p>
-                <input id="Form" name= "recherche" required>
-            </div>
-        </div>
-        <button>Se Connecter</button>
-        <a href="">Mot de passe oublié</a>
+                <label>Mot de passe</label>
+                <input type="password" id="password" name= "form-password" >
+			</div>
+			<div class="bouton"><button type="submit">Se Connecter</button></div>
+        </form>
+		<div class="error" id="errorMessage"></div>
+        <p id="erreur-message" style="color: red;"></p>
     </section>
 </main>
 <footer>

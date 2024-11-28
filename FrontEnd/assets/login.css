@@ -127,7 +127,7 @@ li:hover {
 .form {
 	display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 	gap: 25px;
 }
 
@@ -136,6 +136,10 @@ li:hover {
 	width: 379px;
 	height: 51px;
 	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.1));;
+}
+
+.bouton {
+    margin-top: 15px;
 }
 
 .saisie {
