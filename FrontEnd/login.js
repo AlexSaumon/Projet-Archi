@@ -1,4 +1,4 @@
-import {ajoutListenerMotdepasse} from "./connexion.js";
+//import {ajoutListenerMotdepasse} from "./connexion.js";
 
 const form = document.getElementById('log');
 const mail_input = document.getElementById('mail');
@@ -15,7 +15,10 @@ form.addEventListener('submit', (e) => {
     if(errors.length > 0){
         error_message.innerText = errors.join(". ")
     }
-    ajoutListenerMotdepasse(mail_input.value, password_input.value);
+    console.log("Email Input:", mail_input.value);
+    console.log("Password Input:", password_input.value);
+
+    //ajoutListenerMotdepasse(mail_input.value, password_input.value);
 })
 
 function getLoginFormErrors (formmail, formpassword){
