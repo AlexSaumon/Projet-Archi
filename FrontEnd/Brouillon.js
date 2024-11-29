@@ -115,3 +115,18 @@ export async function ajoutListenerMotdepasse(email, password) {
 
 
  */
+
+/**
+ * if (api) {
+        error_message.innerText = api;
+        console.log("Erreur de connexion");
+    }
+
+    else {
+        console.log("Login successful!");
+        localStorage.setItem("token", result.token);
+        //pas sur si ça marche avec le token window.location.href = "index.html";
+        console.log("test token", result.token)
+    }
+
+ */

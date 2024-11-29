@@ -19,17 +19,17 @@ form.addEventListener('submit',async (e) => {
 
     const api = await ajoutListenerMotdepasse(mail_input.value, password_input.value);
 
-    if (api) {
-        error_message.innerText = api;
-        console.log("Erreur de connexion");
+    if (api.error) {
+        error_message.innerText = api.error;
+        console.log("Erreur de connexion", api.error);
     }
 
     else {
-        console.log("Login successful!");
-        //pas sur si ça marche avec le token window.location.href = "index.html";
-        function retriveToken(api,token){
-            
-        }
+        console.log("Connecté !!");
+        localStorage.setItem("token", api.token);
+        alert ("Vous êtes connecté!");
+        //window.location.href = "index.html";
+        console.log("test token", api.token)
     }
 
     console.log("Email Input 2:", mail_input.value);

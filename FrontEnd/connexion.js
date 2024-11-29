@@ -16,11 +16,12 @@ export async function ajoutListenerMotdepasse(email, password) {
 
             if (response.ok){
                 const succes = await response.json();
-                console.log("YES", succes);
+                console.log("YES", succes.token);
+                return {token: succes.token};
             }
             else {
                 const fail = await response.json();
                 console.log("NO", fail);
-                return fail.message || "Identifiants de connexion incorrect";
+                return  { error: fail.message || "Identifiants de connexion incorrect" };
             }   
 }
