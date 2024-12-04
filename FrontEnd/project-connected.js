@@ -12,6 +12,17 @@ else {
     banner.style.display = "none";
 }
 
+const buttonModif= document.querySelector(".btn-modifier")
+
+if (isConnected() && buttonModif) {
+    const buttonElement = document.createElement("p");
+    buttonElement.innerHTML = "Modifier";
+    buttonModif.appendChild(buttonElement);
+}
+else {
+    buttonModif.style.display = "none";
+}
+
 const filter= document.querySelector(".filter");
 
 if (isConnected() && filter) {

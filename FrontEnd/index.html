@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="Project.js"></script>
 	<script type="module" src="project-connected.js"></script>
+	<script type="module" src="modale.js"></script>
 	
 
 </head>
@@ -28,6 +29,15 @@
 		</ul>
 	</nav>
 </header>
+<a href="#modale" class="js-modal">modale test</a>
+	<aside id="modale" class = "modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style="display: none;">
+		<div class="modale-wrapper js-modal-stop">
+			<button class="js-close-modal">Fermer la fenetre</button>
+			<h1 id="titlemodale"> test de modale</h1>
+			<input type="text" name="test-input-modale">
+			<a href="#">lien</a>
+		</div>
+	</aside>
 <main>
 	<section id="introduction">
 		<figure>
@@ -43,7 +53,7 @@
 	<section id="portfolio">
 		<div class="projet">
 			<h2>Mes Projets</h2>
-			<div class="btn-modifier">modifier</div>
+			<div class="btn-modifier"></div>
 		</div>
 		<section class="filter">
 			<button class="btn-tous">Tous</button>
