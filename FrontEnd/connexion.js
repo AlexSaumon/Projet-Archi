@@ -13,7 +13,6 @@ export async function ajoutListenerMotdepasse(email, password) {
                 headers: { "Content-type": "application/json"},
                 body: dataJS
             })
-            console.log("reste reponse", response)
             if (response.ok){
                 const succes = await response.json();
                 return {token: succes.token};

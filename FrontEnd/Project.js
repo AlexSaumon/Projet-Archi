@@ -1,5 +1,8 @@
+import {isConnected } from "./connected.js";
 const response = await fetch('http://localhost:5678/api/works');
 const works = await response.json();
+
+
 
 /** Retrieve gallery data from localStorage */
 let gallery = JSON.parse(window.localStorage.getItem("gallery")) || works;
@@ -31,12 +34,19 @@ function galerieTravaux(data) {
 }
 
 // Initial render of the gallery
-galerieTravaux(gallery);
+galerieTravaux(gallery)
 
 // Add event listener for filtering
 
+
 const boutonTous = document.querySelector(".filter .btn-tous"); 
 
+
+if (isConnected()) {
+    console.log("User is logged in.");
+} else {
+    console.log("User is not logged in.");
+}
 if (boutonTous) {
     boutonTous.addEventListener("click", function () {
         const galleryFilter = gallery.filter(item => item.categoryId );
@@ -71,3 +81,29 @@ if (boutonHotel) {
     });
 }
 
+const filter= document.querySelector(".filter");
+
+if (isConnected() && filter) {
+    filter.style.display = "none";
+}
+
+const login = document.querySelector(".login");
+
+if  (isConnected() && login) {
+    const logoutElement = document.createElement("p");
+    logoutElement.innerText = "logout";
+    logoutElement.style.cursor = "pointer"; // pour que je puisse clické
+    logoutElement.addEventListener("click", function () {
+        window.sessionStorage.clear();
+        alert("Vous êtez déconnecté");
+        window.location.href = "./login.html";
+    });
+    login.appendChild(logoutElement)
+}
+
+else {
+    const loginElement = document.createElement("a");
+    loginElement.innerText = "login";
+    loginElement.href = "./login.html";
+    login.appendChild(loginElement)
+}
