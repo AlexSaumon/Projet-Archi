@@ -1,16 +1,15 @@
 import {ajoutListenerMotdepasse} from "./connexion.js";
 
-const form = document.getElementById('log');
+const my_form = document.getElementById('log');
 const mail_input = document.getElementById('mail');
 const password_input = document.getElementById('password');
 const error_message = document.getElementById('erreur-message');
 
-form.addEventListener('submit',async (e) => {
+my_form.addEventListener('submit',async (e) => {
+    // réinitialise la fonction de submit quand il y a des érreurs
     error_message.innerText = "";
-        // réinitialise ka fonction de submit quand il y a des érreurs
-        e.preventDefault()
-    clearErrorStyles();
-    const errors = getLoginFormErrors (mail_input.value, password_input.value)
+    e.preventDefault();
+    const errors = validateForm (mail_input.value, password_input.value)
     if(errors.length > 0){
         error_message.innerText = errors.join(". ")
     }
@@ -20,15 +19,15 @@ form.addEventListener('submit',async (e) => {
     const api = await ajoutListenerMotdepasse(mail_input.value, password_input.value);
 
     if (api.error) {
-        error_message.innerText = api.error;
+        error_message.innerText = "Identifiants incorrects";
         console.log("Erreur de connexion", api.error);
     }
 
     else {
         console.log("Connecté !!");
-        localStorage.setItem("token", api.token);
+        sessionStorage.setItem("token", api.token);
         alert ("Vous êtes connecté!");
-        //window.location.href = "index.html";
+        window.location.href = "index.html";
         console.log("test token", api.token)
     }
 
@@ -36,7 +35,7 @@ form.addEventListener('submit',async (e) => {
     console.log("Password Input 2:", password_input.value);
 })
 
-function getLoginFormErrors (formmail, formpassword){
+function validateForm (formmail, formpassword){
     const errors = [];
     if (formmail.trim() === "") {
         errors.push("Mettez un email");
@@ -47,9 +46,4 @@ function getLoginFormErrors (formmail, formpassword){
         password_input.parentElement.classList.add('Incorrect');
     }
     return errors;
-}
-// néttoye l'érreur pour un autre try
-function clearErrorStyles() {
-    mail_input.parentElement.classList.remove("Incorrect");
-    password_input.parentElement.classList.remove("Incorrect");
 }

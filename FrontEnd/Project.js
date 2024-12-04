@@ -70,3 +70,4 @@ if (boutonHotel) {
         galerieTravaux(galleryFilter);
     });
 }
+
