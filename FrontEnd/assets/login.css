@@ -100,6 +100,10 @@ button {
     justify-content: center;
     align-items: center;
 }
+button:hover {
+	background-color: #FFFEF8;
+	color: #1D6154;
+}
 
 nav ul {
 	display: flex;
