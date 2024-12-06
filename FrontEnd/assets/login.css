@@ -87,6 +87,16 @@ h2{
 	color: #1D6154
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+	color: #B1663C;
+}
+
+
 button {
 	font-family: 'Syne';
 	font-weight: 700;

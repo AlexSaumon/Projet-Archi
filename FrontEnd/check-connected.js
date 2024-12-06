@@ -3,24 +3,25 @@ import {isConnected } from "./connected.js";
 const banner = document.querySelector(".banner")
 
 if  (isConnected() && banner) {
-    const bannerElement = document.createElement("p");
-    bannerElement.innerHTML = "Mode édition";
-    banner.appendChild(bannerElement);
+    const bannerIcon = document.createElement("i");
+    bannerIcon.className = "fa-regular fa-pen-to-square";
+
+    const bannerText = document.createElement("p");
+    bannerText.innerHTML = "Mode édition";
+
+    banner.appendChild(bannerIcon);
+    banner.appendChild(bannerText);
+    banner.classList.add("banner-on") /**permet d'empecher de mettre du css dans le html */
 }
 
 else {
-    banner.style.display = "none";
+    banner.classList.add("banner-off");
 }
 
-const buttonModif= document.querySelector(".btn-modifier")
+const modal = document.querySelector(".js-modal");
 
-if (isConnected() && buttonModif) {
-    const buttonElement = document.createElement("p");
-    buttonElement.innerHTML = "Modifier";
-    buttonModif.appendChild(buttonElement);
-}
-else {
-    buttonModif.style.display = "none";
+if (!isConnected() && modal) {
+    modal.style.display = "none"; /**à chnger car ça met du css dans le html */
 }
 
 const filter= document.querySelector(".filter");
@@ -49,5 +50,4 @@ else {
     loginElement.href = "./login.html";
     login.appendChild(loginElement)
 }
-
 
