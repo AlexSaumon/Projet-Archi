@@ -131,6 +131,20 @@ a:hover {
 	color: #B1663C;
 }
 
+h3 {
+	font-weight: 400;
+	font-size: 26px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+	color: #B1663C;
+}
+
 button {
 	font-family: 'Syne';
 	font-weight: 700;
@@ -277,6 +291,11 @@ footer nav ul {
 	gap: 10px;
 }
 
+.js-modal {
+	display: flex;
+	gap: 10px;
+}
+
 .modal {
 	position: fixed;
 	display: flex;
@@ -291,13 +310,83 @@ footer nav ul {
 
 .modale-wrapper {
 	display: flex;
+	display: flex;
 	background-color: #ffffff;
 	width: 630px;
 	height: 688px;
 	border-radius: 10px;
 	max-width: calc(100vw - 20px);
+	max-width: calc(100vw - 20px);
 	max-height: calc(100vw - 20px);
 	padding: 20px;
+	flex-direction: column;
+	gap: 20px;
+
+}
+
+.modal-main {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	height: auto;
+	gap: 60px;
+	background-color: #ffffff;
+}
+
+.modal-gallery {
+	display: grid;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	background-color: #ffffff;
+	width: 100%;
+	box-sizing: border-box;
+	max-width: 75%;
+	border-bottom: solid 1px #B3B3B3;
+	padding-bottom: 70px;
+}
+
+.modale-wrapper h3 {
+	background-color: #ffffff;
+}
+
+.modal-gallery img{
+	width: 76.9px;
+	height: 102.57px;
+}
+
+.js-close-modal {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	display: flex;
+    justify-content: flex-end;
+}
+
+.js-close-modal:hover i {
+    color: #B1663C;
+}
+
+.modal .fa-solid {
+	color: black;
+}
+
+.btn-ajout-container {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	box-sizing: border-box;
+	background-color: transparent;
+	padding-top: 25px;
+}
+
+.btn-ajout {
+	cursor: pointer;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
 	flex-direction: column;
 	gap: 20px;
 
