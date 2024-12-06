@@ -2,13 +2,12 @@
 const response = await fetch('http://localhost:5678/api/works');
 const works = await response.json();
 
-/** Retrieve gallery data from localStorage */
 let gallery = JSON.parse(window.localStorage.getItem("gallery")) || works;
+let modal_gallery = JSON.parse(window.localStorage.getItem("modal-gallery")) || works;
 
-// Function to render gallery items
 function galerieTravaux(data) {
     const sectionGallery = document.querySelector(".gallery");
-    sectionGallery.innerHTML = ""; // Clear previous items
+    sectionGallery.innerHTML = ""; 
 
     for (let i = 0; i < data.length; i++) {
         const article = data[i];
@@ -31,10 +30,31 @@ function galerieTravaux(data) {
     }
 }
 
-// Initial render of the gallery
 galerieTravaux(gallery)
 
-// Add event listener for filtering
+function galerieModale(data) {
+    const sectionModalGallery = document.querySelector(".modal-gallery");
+    sectionModalGallery.innerHTML = ""; 
+
+    for (let i = 0; i < data.length; i++) {
+        const article = data[i];
+
+        const iconElement = document.createElement("i");
+        iconElement.className = "fa-solid fa-trash-can";
+
+        const ficheElement = document.createElement("article");
+        ficheElement.dataset.id = article.categoryId;
+
+        const imageElement = document.createElement("img");
+        imageElement.src = article.imageUrl;
+
+        ficheElement.appendChild(imageElement);
+        ficheElement.appendChild(iconElement);
+        sectionModalGallery.appendChild(ficheElement);
+    }
+}
+
+galerieModale(modal_gallery)
 
 
 const boutonTous = document.querySelector(".filter .btn-tous"); 

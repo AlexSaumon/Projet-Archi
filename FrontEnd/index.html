@@ -7,10 +7,13 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" >
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="Project.js"></script>
-	<script type="module" src="project-connected.js"></script>
+	<script type="module" src="check-connected.js"></script>
 	<script type="module" src="modale.js"></script>
 	
 
@@ -29,15 +32,6 @@
 		</ul>
 	</nav>
 </header>
-<a href="#modale" class="js-modal">modale test</a>
-	<aside id="modale" class = "modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style="display: none;">
-		<div class="modale-wrapper js-modal-stop">
-			<button class="js-close-modal">Fermer la fenetre</button>
-			<h1 id="titlemodale"> test de modale</h1>
-			<input type="text" name="test-input-modale">
-			<a href="#">lien</a>
-		</div>
-	</aside>
 <main>
 	<section id="introduction">
 		<figure>
@@ -53,7 +47,20 @@
 	<section id="portfolio">
 		<div class="projet">
 			<h2>Mes Projets</h2>
-			<div class="btn-modifier"></div>
+			<a href="#modale" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
+			<aside id="modale" class = "modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style="display: none;">
+				<div class="modale-wrapper js-modal-stop">
+					<button class="js-close-modal">
+						<i class="fa-solid fa-xmark"></i>
+					</button>
+					<div class="modal-main">
+						<h3>Galerie Photo</h3>
+						<div class="modal-gallery"></div>
+					</div>
+					<div class="btn-ajout-container"><button class="btn-ajout">Ajouter une photo</button></div>
+				</div>
+			</aside>
+			<!--<i class="fa-solid fa-trash-can"></i> icone trash, histoire que ce soit marquer quelque part-->
 		</div>
 		<section class="filter">
 			<button class="btn-tous">Tous</button>
