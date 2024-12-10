@@ -53,7 +53,7 @@
 			<h2>Mes Projets</h2>
 			<a href="#modale" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
 			<aside id="modale" class = "modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style="display: none;">
-				<div class="modale-wrapper js-modal-stop">
+				<div class="modale-wrapper js-modal-stop page1">
 					<button class="js-close-modal">
 						<i class="fa-solid fa-xmark"></i>
 					</button>
@@ -63,8 +63,34 @@
 					</div>
 					<div class="btn-ajout-container"><button class="btn-ajout">Ajouter une photo</button></div>
 				</div>
+				<div class="modale-wrapper js-modal-stop page2">
+					<button class="js-close-modal">
+						<i class="fa-solid fa-xmark"></i>
+					</button>
+					<div class="modal-main-2">
+						<h3>Ajout photo</h3>
+						<div class="file-input">
+							<i class="fa-regular fa-image fa-2xl"></i>
+								<div class="file-container">
+								<label for="titre" class="file-label">+ Ajouter photo</label>
+								<input type="file" name="titre" id="titre" hidden>
+								<p>jpg, png : 4mo max</p>
+							</div>
+						</div>
+						<div class="file-info">
+							<div class="file-id">
+								<label for="titre">Titre</label>
+								<input type="titre" name="titre" id="titre">
+							</div>
+							<div class="file-id">
+								<label for="categorie">Message</label>
+								<input type="categorie" name="categorie" id="categorie">
+							</div>	
+						</div>
+						<input type="submit" value="Valider">
+					</div>
+				</div>
 			</aside>
-			<!--<i class="fa-solid fa-trash-can"></i> icone trash, histoire que ce soit marquer quelque part-->
 		</div>
 		<section class="filter">
 			<button class="btn-tous">Tous</button>
