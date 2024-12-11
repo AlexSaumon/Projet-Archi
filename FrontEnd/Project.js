@@ -137,13 +137,13 @@ async function handleDeleteClick(id) {
     }
 }
 
-// Get form elements
+
 const fileInput = document.getElementById("file");
 const titleInput = document.getElementById("titre");
 const categoryInput = document.getElementById("categorie");
 const submitButton = document.getElementById("submit-btn");
 
-// Function to handle form submission
+
 submitButton.addEventListener("click", async function (event) {
     event.preventDefault();
 
@@ -167,20 +167,18 @@ submitButton.addEventListener("click", async function (event) {
         return;
     }
 
-    // Prepare form data
     const formData = new FormData();
     formData.append("image", fileInput.files[0]);
     formData.append("title", titleInput.value.trim());
     formData.append("category", categoryInput.value);
 
     try {
-        // Send data to the server
-        const token = sessionStorage.getItem("token"); // Get the token
+        
+        const token = sessionStorage.getItem("token"); 
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                Authorization: `Bearer ${token}`, // Add token for authorization
-                Accept: "application/json",
+                Authorization: `Bearer ${token}`, 
             },
             body: formData,
         });
@@ -189,8 +187,8 @@ submitButton.addEventListener("click", async function (event) {
             const result = await response.json();
             alert("Photo ajoutée avec succès !");
             console.log(result);
-
-            // Optionally reset the form
+            galerieTravaux(gallery);
+            galerieModale(modal_gallery);
             fileInput.value = "";
             titleInput.value = "";
             categoryInput.value = "";

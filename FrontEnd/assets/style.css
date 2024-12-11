@@ -315,11 +315,12 @@ footer nav ul {
 	display: flex;
 	background-color: #ffffff;
 	width: 630px;
-	height: 688px;
+	height: auto;
 	border-radius: 10px;
 	max-width: calc(100vw - 20px);
 	max-width: calc(100vw - 20px);
-	max-height: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+    overflow-y: auto;
 	padding: 20px;
 	flex-direction: column;
 	gap: 20px;
@@ -448,12 +449,18 @@ footer nav ul {
 	height: 102.57px;
 }
 
-.js-close-modal {
+.page-button {
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 	display: flex;
     justify-content: flex-end;
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	background-color: #ffffff;
 }
 
 .js-close-modal:hover i {

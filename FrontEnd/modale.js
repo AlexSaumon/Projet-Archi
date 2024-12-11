@@ -51,3 +51,11 @@ if (boutonAjout) {
     })
 }
 
+const boutonPage = document.querySelector('.page-button')
+
+if (boutonPage) {
+    boutonPage.addEventListener("click", function () {
+        page2.style.display = "none"
+        page1.style.display = "flex"
+    })
+}
