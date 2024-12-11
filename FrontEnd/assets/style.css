@@ -293,11 +293,6 @@ footer nav ul {
 	gap: 10px;
 }
 
-.js-modal {
-	display: flex;
-	gap: 10px;
-}
-
 .modal {
 	position: fixed;
 	display: flex;
@@ -467,10 +462,6 @@ footer nav ul {
     color: #B1663C;
 }
 
-.page2 {
-	display: none;
-}
-
 .modal .fa-solid {
 	color: black;
 }
@@ -577,4 +568,8 @@ footer nav ul {
 	cursor: pointer;
 	padding-left: 40px;
 	padding-right: 40px;
+}
+
+.item-off {
+	display: none;
 }

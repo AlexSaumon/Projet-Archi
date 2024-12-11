@@ -21,13 +21,13 @@ else {
 const modal = document.querySelector(".js-modal");
 
 if (!isConnected() && modal) {
-    modal.style.display = "none"; /**à chnger car ça met du css dans le html */
+    modal.classList.replace("js-modal", "item-off")
 }
 
 const filter= document.querySelector(".filter");
 
 if (isConnected() && filter) {
-    filter.style.display = "none";
+    filter.classList.replace("filter", "item-off")
 }
 
 const login = document.querySelector(".login");
@@ -50,4 +50,3 @@ else {
     loginElement.href = "./login.html";
     login.appendChild(loginElement)
 }
-

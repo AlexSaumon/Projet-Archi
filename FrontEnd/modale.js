@@ -46,8 +46,8 @@ const page2 = document.querySelector('.page2')
 
 if (boutonAjout) {
     boutonAjout.addEventListener("click", function () {
-        page1.style.display = "none"
-        page2.style.display = "flex"
+        page1.classList.add( "item-off")
+        page2.classList.remove( "item-off")
     })
 }
 
@@ -55,7 +55,7 @@ const boutonPage = document.querySelector('.page-button')
 
 if (boutonPage) {
     boutonPage.addEventListener("click", function () {
-        page2.style.display = "none"
-        page1.style.display = "flex"
+        page2.classList.add( "item-off")
+        page1.classList.remove( "item-off")
     })
 }
