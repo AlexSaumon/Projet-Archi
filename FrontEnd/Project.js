@@ -137,6 +137,74 @@ async function handleDeleteClick(id) {
     }
 }
 
+// Get form elements
+const fileInput = document.getElementById("file");
+const titleInput = document.getElementById("titre");
+const categoryInput = document.getElementById("categorie");
+const submitButton = document.getElementById("submit-btn");
+
+// Function to handle form submission
+submitButton.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    // Validate form fields
+    if (!fileInput.files[0]) {
+        alert("Veuillez sélectionner une image.");
+        return;
+    }
+
+    if (fileInput.files[0].size > 4 * 1024 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 4 Mo.");
+        return;
+    }    
+
+    if (!titleInput.value.trim()) {
+        alert("Veuillez entrer un titre.");
+        return;
+    }
+    if (!categoryInput.value) {
+        alert("Veuillez sélectionner une catégorie.");
+        return;
+    }
+
+    // Prepare form data
+    const formData = new FormData();
+    formData.append("image", fileInput.files[0]);
+    formData.append("title", titleInput.value.trim());
+    formData.append("category", categoryInput.value);
+
+    try {
+        // Send data to the server
+        const token = sessionStorage.getItem("token"); // Get the token
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`, // Add token for authorization
+                Accept: "application/json",
+            },
+            body: formData,
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert("Photo ajoutée avec succès !");
+            console.log(result);
+
+            // Optionally reset the form
+            fileInput.value = "";
+            titleInput.value = "";
+            categoryInput.value = "";
+        } else {
+            const error = await response.json();
+            console.error("Erreur lors de l'ajout:", error);
+            alert(`Erreur: ${error.message || "Impossible d'ajouter l'image."}`);
+        }
+    } catch (error) {
+        console.error("Erreur réseau:", error);
+        alert("Une erreur réseau s'est produite. Veuillez réessayer.");
+    }
+});
+
 
 const boutonTous = document.querySelector(".filter .btn-tous"); 
 

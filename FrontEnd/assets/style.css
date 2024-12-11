@@ -415,7 +415,14 @@ footer nav ul {
 	height: 51px;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	border: none;
+}
 
+.file-id select {
+	width: 420px;
+	height: 51px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	background-color: #ffffff;
+	border: none;
 }
 
 .modal-gallery {

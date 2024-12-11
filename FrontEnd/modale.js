@@ -50,3 +50,4 @@ if (boutonAjout) {
         page2.style.display = "flex"
     })
 }
+
