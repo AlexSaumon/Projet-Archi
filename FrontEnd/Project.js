@@ -1,22 +1,32 @@
 
-const response = await fetch('http://localhost:5678/api/works');
-const works = await response.json();
 
-let gallery = JSON.parse(window.localStorage.getItem("gallery")) || works;
-let modal_gallery = JSON.parse(window.localStorage.getItem("modal-gallery")) || works;
+// Global Variables
+let gallery = []; // Main gallery state
+let modal_gallery = []; // Modal gallery state
 
-async function galerieTravaux() {
-    const sectionGallery = document.querySelector(".gallery");
-
+// Fetch the Latest Data From API
+async function fetchGalleryData() {
     try {
-        const updatedResponse = await fetch('http://localhost:5678/api/works');
-        gallery = await updatedResponse.json();
+        const response = await fetch('http://localhost:5678/api/works');
+        const data = await response.json();
+        gallery = data; // Update the main gallery state
+        modal_gallery = data; // Update the modal gallery state
+        return data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données:", error);
+        return [];
+    }
+}
 
-        sectionGallery.innerHTML = ""; 
 
 
-    for (let i = 0; i < gallery .length; i++) {
-        const article = gallery [i];
+
+function galerieTravaux(data) {
+    const sectionGallery = document.querySelector(".gallery");
+    sectionGallery.innerHTML = ""; // Clear previous items
+
+    for (let i = 0; i < data.length; i++) {
+        const article = data[i];
 
         const ficheElement = document.createElement("article");
         ficheElement.dataset.id = article.categoryId;
@@ -27,75 +37,34 @@ async function galerieTravaux() {
         const nomElement = document.createElement("p");
         nomElement.innerText = article.title;
 
-        const idElement = document.createElement("p");
-        idElement.innerText = `Category: ${article.categoryId}`;
-
         ficheElement.appendChild(imageElement);
         ficheElement.appendChild(nomElement);
         sectionGallery.appendChild(ficheElement);
     }
-    } catch (error) {
-        console.error("ça veut plus marcher si je fait pas ça, aled", error);
-    }
 }
 
-galerieTravaux(gallery)
 
-/**function galerieModale(data) {
+function galerieModale(data) {
     const sectionModalGallery = document.querySelector(".modal-gallery");
-    sectionModalGallery.innerHTML = ""; 
+    sectionModalGallery.innerHTML = ""; // Clear the modal gallery
 
-    for (let i = 0; i < data.length; i++) {
-        const article = data[i];
-
-        const iconElement = document.createElement("i");
-        iconElement.className = "fa-solid fa-trash-can";
-
+    data.forEach((article) => {
         const ficheElement = document.createElement("article");
         ficheElement.dataset.id = article.categoryId;
 
         const imageElement = document.createElement("img");
         imageElement.src = article.imageUrl;
 
+        const iconElement = document.createElement("i");
+        iconElement.className = "fa-solid fa-trash-can fa-xs";
+        iconElement.addEventListener("click", function () {
+            handleDeleteClick(article.id);
+        });
+
         ficheElement.appendChild(imageElement);
         ficheElement.appendChild(iconElement);
         sectionModalGallery.appendChild(ficheElement);
-    }
-}*/
-
-
-async function galerieModale() {
-    const sectionModalGallery = document.querySelector(".modal-gallery");
-
-    try {
-        const updatedResponse = await fetch('http://localhost:5678/api/works');
-        modal_gallery = await updatedResponse.json();
-
-        sectionModalGallery.innerHTML = ""; 
-
-        for (let i = 0; i < modal_gallery.length; i++) {
-            const article = modal_gallery[i];
-
-            const iconElement = document.createElement("i");
-            iconElement.className = "fa-solid fa-trash-can fa-xs";
-
-            iconElement.addEventListener("click", function () {
-                handleDeleteClick(article.id);
-            });
-
-            const ficheElement = document.createElement("article");
-            ficheElement.dataset.id = article.categoryId;
-
-            const imageElement = document.createElement("img");
-            imageElement.src = article.imageUrl;
-
-            ficheElement.appendChild(imageElement);
-            ficheElement.appendChild(iconElement);
-            sectionModalGallery.appendChild(ficheElement);
-        }
-    } catch (error) {
-        console.error("ça veut plus marcher si je fait pas ça, aled", error);
-    }
+    });
 }
 
 
@@ -115,21 +84,9 @@ async function handleDeleteClick(id) {
         });
 
         if (response.ok) {
-            // Re-fetch updated works data from the server
-            const updatedResponse = await fetch('http://localhost:5678/api/works');
-            const updatedWorks = await updatedResponse.json();
-
-            // Update gallery and modal-gallery
-            gallery = updatedWorks;
-            modal_gallery = updatedWorks;
-
-            // Re-render both galleries
-            galerieTravaux(gallery);
-            galerieModale(modal_gallery);
-
-            // Optionally update localStorage
-            window.localStorage.setItem("gallery", JSON.stringify(gallery));
-            window.localStorage.setItem("modal-gallery", JSON.stringify(modal_gallery));
+            const updatedData = await fetchGalleryData(); 
+            galerieTravaux(updatedData); 
+            galerieModale(updatedData); 
         } else {
         }
     } catch (error) {
@@ -184,11 +141,10 @@ submitButton.addEventListener("click", async function (event) {
         });
 
         if (response.ok) {
-            const result = await response.json();
             alert("Photo ajoutée avec succès !");
-            console.log(result);
-            galerieTravaux(gallery);
-            galerieModale(modal_gallery);
+            const updatedData = await fetchGalleryData(); 
+            galerieTravaux(updatedData); 
+            galerieModale(updatedData)
             fileInput.value = "";
             titleInput.value = "";
             categoryInput.value = "";
@@ -219,6 +175,7 @@ if (boutonObject) {
     boutonObject.addEventListener("click", function () {
         const galleryFilter = gallery.filter(item => item.categoryId === 1);
         galerieTravaux(galleryFilter);
+        console.log("tri fait")
     });
 }
 
@@ -240,3 +197,8 @@ if (boutonHotel) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", async () => {
+    const initialData = await fetchGalleryData(); 
+    galerieTravaux(initialData); 
+    galerieModale(initialData); 
+});
