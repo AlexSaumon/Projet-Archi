@@ -1,21 +1,17 @@
 
 
-// Global Variables
-let gallery = []; // Main gallery state
-let modal_gallery = []; // Modal gallery state
 
-// Fetch the Latest Data From API
+let gallery = []; 
+let modal_gallery = []; 
+
+// répucère les données mis à jour
 async function fetchGalleryData() {
-    try {
-        const response = await fetch('http://localhost:5678/api/works');
-        const data = await response.json();
-        gallery = data; // Update the main gallery state
-        modal_gallery = data; // Update the modal gallery state
-        return data;
-    } catch (error) {
-        console.error("Erreur lors de la récupération des données:", error);
-        return [];
-    }
+    const response = await fetch('http://localhost:5678/api/works');
+    const data = await response.json();
+    gallery = data; //mise à jour de la galerie
+    modal_gallery = data; 
+    return data;
+    
 }
 
 
@@ -74,23 +70,19 @@ async function handleDeleteClick(id) {
     const confirmation = confirm("Voulez-vous supprimer cet image?");
     if (!confirmation) return;
     const token = sessionStorage.getItem("token");
-    try {
-        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "accept": "*/*"
-            }
-        });
-
-        if (response.ok) {
-            const updatedData = await fetchGalleryData(); 
-            galerieTravaux(updatedData); 
-            galerieModale(updatedData); 
-        } else {
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "accept": "*/*"
         }
-    } catch (error) {
-        
+    });
+
+    if (response.ok) {
+        const updatedData = await fetchGalleryData(); 
+        galerieTravaux(updatedData); 
+        galerieModale(updatedData); 
+    } else {
     }
 }
 
@@ -128,34 +120,28 @@ submitButton.addEventListener("click", async function (event) {
     formData.append("image", fileInput.files[0]);
     formData.append("title", titleInput.value.trim());
     formData.append("category", categoryInput.value);
-
-    try {
         
-        const token = sessionStorage.getItem("token"); 
-        const response = await fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`, 
-            },
-            body: formData,
-        });
+    const token = sessionStorage.getItem("token"); 
+    const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+        body: formData,
+    });
 
-        if (response.ok) {
-            alert("Photo ajoutée avec succès !");
-            const updatedData = await fetchGalleryData(); 
-            galerieTravaux(updatedData); 
-            galerieModale(updatedData)
-            fileInput.value = "";
-            titleInput.value = "";
-            categoryInput.value = "";
-        } else {
-            const error = await response.json();
-            console.error("Erreur lors de l'ajout:", error);
-            alert(`Erreur: ${error.message || "Impossible d'ajouter l'image."}`);
-        }
-    } catch (error) {
-        console.error("Erreur réseau:", error);
-        alert("Une erreur réseau s'est produite. Veuillez réessayer.");
+    if (response.ok) {
+        alert("Photo ajoutée avec succès !");
+        const updatedData = await fetchGalleryData(); 
+        galerieTravaux(updatedData); 
+        galerieModale(updatedData)
+        fileInput.value = "";
+        titleInput.value = "";
+        categoryInput.value = "";
+    } else {
+        const error = await response.json();
+        console.error("Erreur lors de l'ajout:", error);
+        alert(`Erreur: ${error.message || "Impossible d'ajouter l'image."}`);
     }
 });
 
