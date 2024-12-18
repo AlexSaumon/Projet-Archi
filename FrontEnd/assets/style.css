@@ -307,12 +307,10 @@ footer nav ul {
 
 .modale-wrapper {
 	display: flex;
-	display: flex;
 	background-color: #ffffff;
 	width: 630px;
 	height: auto;
 	border-radius: 10px;
-	max-width: calc(100vw - 20px);
 	max-width: calc(100vw - 20px);
 	max-height: 690px;
     overflow-y: auto;
