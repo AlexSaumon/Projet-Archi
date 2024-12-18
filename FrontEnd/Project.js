@@ -19,7 +19,7 @@ async function fetchGalleryData() {
 
 function galerieTravaux(data) {
     const sectionGallery = document.querySelector(".gallery");
-    sectionGallery.innerHTML = ""; // Clear previous items
+    sectionGallery.innerHTML = ""; // 
 
     for (let i = 0; i < data.length; i++) {
         const article = data[i];
@@ -42,7 +42,7 @@ function galerieTravaux(data) {
 
 function galerieModale(data) {
     const sectionModalGallery = document.querySelector(".modal-gallery");
-    sectionModalGallery.innerHTML = ""; // Clear the modal gallery
+    sectionModalGallery.innerHTML = ""; 
 
     data.forEach((article) => {
         const ficheElement = document.createElement("article");
@@ -140,7 +140,6 @@ submitButton.addEventListener("click", async function (event) {
         categoryInput.value = "";
     } else {
         const error = await response.json();
-        console.error("Erreur lors de l'ajout:", error);
         alert(`Erreur: ${error.message || "Impossible d'ajouter l'image."}`);
     }
 });
