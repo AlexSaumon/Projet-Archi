@@ -88,33 +88,76 @@ async function handleDeleteClick(id) {
 
 
 const fileInput = document.getElementById("file");
+const fileLabel = document.getElementById("file-label");
 const titleInput = document.getElementById("titre");
 const categoryInput = document.getElementById("categorie");
 const submitButton = document.getElementById("submit-btn");
+const container = document.getElementById("container");
+const fileContainer = document.getElementById("file-container");
+const previewContainer = document.getElementById("preview-container");
 
+function addSingleFile(event) {
+    const file = event.target.files[0]; // Get the selected file
+
+    // Validate if a file was selected
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+        alert("Veuillez sélectionner un fichier image.");
+        return;
+    }
+
+    // Clear the container before showing a new preview
+    container.innerHTML = "";
+
+
+
+    // Use FileReader to generate the preview
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const imgElement = document.createElement("img");
+        imgElement.src = e.target.result; // Set the base64 image source
+        fileContainer.classList.replace("file-container", "item-off")
+        previewContainer.classList.replace("item-off", "file-container")
+        submitButton.classList.replace("submit-btn-css-off", "submit-btn-css")
+        container.appendChild(imgElement); // Append preview to the container
+    };
+    reader.readAsDataURL(file); // Read the file as a base64 URL
+}
+
+fileInput.addEventListener("change", addSingleFile);
 
 submitButton.addEventListener("click", async function (event) {
     event.preventDefault();
 
-    // Validate form fields
-    if (!fileInput.files[0]) {
-        alert("Veuillez sélectionner une image.");
-        return;
-    }
+    document.querySelectorAll(".error-message").forEach((span) => {
+        span.innerText = "";
+    });
 
+    let hasError = false;
+
+    if (!fileInput.files[0]) {
+        document.getElementById("file-error").innerText = "Veuillez sélectionner une image.";
+        hasError = true;
+    } 
+    
     if (fileInput.files[0].size > 4 * 1024 * 1024) {
-        alert("La taille de l'image ne doit pas dépasser 4 Mo.");
-        return;
-    }    
+        document.getElementById("file-error").innerText = "La taille de l'image ne doit pas dépasser 4 Mo.";
+        hasError = true;
+    }
 
     if (!titleInput.value.trim()) {
-        alert("Veuillez entrer un titre.");
-        return;
+        document.getElementById("titre-error").innerText = "Veuillez entrer un titre.";
+        hasError = true;
     }
+
     if (!categoryInput.value) {
-        alert("Veuillez sélectionner une catégorie.");
-        return;
+        document.getElementById("categorie-error").innerText = "Veuillez sélectionner une catégorie.";
+        hasError = true;
     }
+
+    if (hasError) return;
 
     const formData = new FormData();
     formData.append("image", fileInput.files[0]);
@@ -138,6 +181,10 @@ submitButton.addEventListener("click", async function (event) {
         fileInput.value = "";
         titleInput.value = "";
         categoryInput.value = "";
+        container.innerHTML = "";
+        fileContainer.classList.replace("item-off", "file-container");
+        previewContainer.classList.replace("file-container", "item-off");
+        submitButton.classList.replace("submit-btn-css", "submit-btn-css-off")
     } else {
         const error = await response.json();
         alert(`Erreur: ${error.message || "Impossible d'ajouter l'image."}`);

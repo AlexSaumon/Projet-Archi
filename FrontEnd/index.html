@@ -52,7 +52,7 @@
 		<div class="projet">
 			<h2>Mes Projets</h2>
 			<a href="#modale" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
-			<aside id="modale" class = "modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale" style="display: none;"> <!-- euh ... pourquoi ça pète quand je le met dans le css -->
+			<aside id="modale" class = "modal-off" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodale"> <!-- euh ... pourquoi ça pète quand je le met dans le css -->
 				<div class="modale-wrapper js-modal-stop page1">
 					<button class="js-close-modal">
 						<i class="fa-solid fa-xmark"></i>
@@ -75,17 +75,22 @@
 					<form class="modal-main-2" novalidate>
 						<h3>Ajout photo</h3>
 						<div class="file-input">
-							<i class="fa-regular fa-image fa-2xl"></i>
-							<div class="file-container">
+							<div class="file-container" id="file-container">
+								<i class="fa-regular fa-image fa-2xl"></i>
 								<label for="file" class="file-label">+ Ajouter photo</label>
 								<input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)">
 								<p>jpg, png : 4mo max</p>
+								<span class="error-message" id="file-error"></span>
+							</div>
+							<div id="preview-container" class="item-off">
+								<div id="container" class="preview"></div>
 							</div>
 						</div>
 						<div class="file-info">
 							<div class="file-id">
 								<label for="titre">Titre</label>
 								<input type="text" name="titre" id="titre">
+								<span class="error-message" id="titre-error"></span>
 							</div>
 							<div class="file-id">
 								<label for="categorie">Catégorie</label>
@@ -95,9 +100,10 @@
 									<option value="2">Appartements</option>
 									<option value="3">Hotels & restaurants</option>
 								</select>
+								<span class="error-message" id="categorie-error"></span>
 							</div>	
 						</div>
-						<button class="submit-btn-css" id="submit-btn">Valider</button>
+						<button class="submit-btn-css-off" id="submit-btn">Valider</button>
 					</form>
 				</div>
 			</aside>

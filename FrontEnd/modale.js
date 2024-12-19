@@ -1,9 +1,10 @@
 let modal = null;
+const modaleContainer = document.getElementById("modale");
 
 const openModale = function (e) {
     e.preventDefault(e)
     const target = document.querySelector(e.target.getAttribute('href'))
-    target.style.display = null
+    modaleContainer.classList.replace ("modal-off", "modal")
     target.removeAttribute('aria-hidden')
     target.setAttribute('aria-modal', 'true')
     modal = target
@@ -17,20 +18,23 @@ const openModale = function (e) {
 }
 
 const closeModal = function (e) {
-    if (modal === null) return
-    e.preventDefault(e)
-    modal.style.display = "none"
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('aria-modal')
-    modal.removeEventListener('click', closeModal)
-    modal.querySelectorAll('.js-close-modal').forEach(closeButton => {
-        closeButton.removeEventListener('click', closeModal);
-    });
-    modal.querySelectorAll('.js-modal-stop').forEach(modalStop => {
-        modalStop.removeEventListener('click', stopPropagation);
-    });
-    modal = null
-}
+    if (modal === null) return;
+
+    if (e.target === modal || e.target.closest('.js-close-modal')) {
+        e.preventDefault();
+        modaleContainer.classList.replace ("modal", "modal-off")
+        modal.setAttribute('aria-hidden', 'true');
+        modal.removeAttribute('aria-modal');
+        modal.removeEventListener('click', closeModal);
+        modal.querySelectorAll('.js-close-modal').forEach(closeButton => {
+            closeButton.removeEventListener('click', closeModal);
+        });
+        modal.querySelectorAll('.js-modal-stop').forEach(modalStop => {
+            modalStop.removeEventListener('click', stopPropagation);
+        });
+        modal = null;
+    } return
+};
 
 const stopPropagation = function (e) {
     e.stopPropagation()
