@@ -19,7 +19,7 @@ async function fetchGalleryData() {
 
 function galerieTravaux(data) {
     const sectionGallery = document.querySelector(".gallery");
-    sectionGallery.innerHTML = ""; // 
+    sectionGallery.innerHTML = ""; 
 
     for (let i = 0; i < data.length; i++) {
         const article = data[i];
@@ -97,33 +97,27 @@ const fileContainer = document.getElementById("file-container");
 const previewContainer = document.getElementById("preview-container");
 
 function addSingleFile(event) {
-    const file = event.target.files[0]; // Get the selected file
-
-    // Validate if a file was selected
+    const file = event.target.files[0]; 
     if (!file) return;
 
-    // Validate file type
+    // Validattion
     if (!file.type.startsWith("image/")) {
         alert("Veuillez sélectionner un fichier image.");
         return;
     }
-
-    // Clear the container before showing a new preview
     container.innerHTML = "";
 
-
-
-    // Use FileReader to generate the preview
+    // Generation de la preview
     const reader = new FileReader();
     reader.onload = function (e) {
         const imgElement = document.createElement("img");
-        imgElement.src = e.target.result; // Set the base64 image source
+        imgElement.src = e.target.result;
         fileContainer.classList.replace("file-container", "item-off")
         previewContainer.classList.replace("item-off", "file-container")
         submitButton.classList.replace("submit-btn-css-off", "submit-btn-css")
-        container.appendChild(imgElement); // Append preview to the container
+        container.appendChild(imgElement); 
     };
-    reader.readAsDataURL(file); // Read the file as a base64 URL
+    reader.readAsDataURL(file); 
 }
 
 fileInput.addEventListener("change", addSingleFile);
