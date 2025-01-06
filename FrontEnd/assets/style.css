@@ -202,14 +202,15 @@ li:hover {
 	gap: 10px;
 }
 
-.filter {
+.filter-button {
 	display: flex;
     justify-content: center;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
+	padding-bottom: 20px;
 }
 
-.filter button {
+.filter-button button {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 16px;
@@ -220,10 +221,9 @@ li:hover {
 	padding: 10px;
 }
 
-.filter button:hover {
+.filter-button button:hover {
 	color: white;
-	background-color: #1D6154;
-}
+	background-color: #1D6154; }
 
 .gallery {
 	width: 100%;

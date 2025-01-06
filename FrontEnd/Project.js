@@ -3,6 +3,7 @@
 
 let gallery = []; 
 let modal_gallery = []; 
+let category = [];
 
 // répucère les données mis à jour
 async function fetchGalleryData() {
@@ -14,7 +15,49 @@ async function fetchGalleryData() {
     
 }
 
+async function fetchCategoryId() {
+    const response = await fetch('http://localhost:5678/api/categories');
+    const idData = await response.json();
+    console.log("Fetched Categories:", idData); // Debugging Log
+    category = idData;
+    return idData;
+}
 
+
+ // placement de la fonction catégorie data
+
+function categoryButton(idData) {
+    const sectionGallery = document.querySelector(".filter-button");
+    sectionGallery.innerHTML = ""; 
+    for (let i = 0; i < idData.length; i++) {
+        const article = idData[i];
+
+        const categoryElement = document.createElement("button");
+        categoryElement.innerText = article.name;
+        categoryElement.dataset.id = article.id;
+        categoryElement.className = "btn-category";
+
+        categoryElement.addEventListener("click", function () {
+            const filteredGallery = gallery.filter(item => item.categoryId === article.id);
+            galerieTravaux(filteredGallery);
+        });
+
+        sectionGallery.appendChild(categoryElement);
+
+    }
+
+    const allButton = document.createElement("button");
+    allButton.innerText = "Tous";
+    allButton.className = "btn-category";
+    allButton.addEventListener("click", () => {
+        galerieTravaux(gallery); 
+    });
+
+    sectionGallery.prepend(allButton);
+}
+
+categoryButton(category);
+ //placemment de la fonction créatyion bouton
 
 
 function galerieTravaux(data) {
@@ -186,45 +229,11 @@ submitButton.addEventListener("click", async function (event) {
 });
 
 
-const boutonTous = document.querySelector(".filter .btn-tous"); 
-
-if (boutonTous) {
-    boutonTous.addEventListener("click", function () {
-        const galleryFilter = gallery.filter(item => item.categoryId );
-        galerieTravaux(galleryFilter);
-    });
-}
-
-const boutonObject = document.querySelector(".filter .btn-objet"); 
-
-if (boutonObject) {
-    boutonObject.addEventListener("click", function () {
-        const galleryFilter = gallery.filter(item => item.categoryId === 1);
-        galerieTravaux(galleryFilter);
-        console.log("tri fait")
-    });
-}
-
-const boutonAppartement = document.querySelector(".filter .btn-Appart")
-
-if (boutonAppartement) {
-    boutonAppartement.addEventListener("click", function () {
-        const galleryFilter = gallery.filter(item => item.categoryId === 2);
-        galerieTravaux(galleryFilter);
-    });
-}
-
-const boutonHotel = document.querySelector(".filter .btn-hotel")
-
-if (boutonHotel) {
-    boutonHotel.addEventListener("click", function () {
-        const galleryFilter = gallery.filter(item => item.categoryId === 3);
-        galerieTravaux(galleryFilter);
-    });
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
     const initialData = await fetchGalleryData(); 
     galerieTravaux(initialData); 
     galerieModale(initialData); 
+
+    const categories = await fetchCategoryId(); 
+    categoryButton(categories); 
 });
