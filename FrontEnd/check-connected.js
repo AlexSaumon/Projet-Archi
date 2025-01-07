@@ -1,5 +1,7 @@
 import {isConnected } from "./connected.js";
 
+// change l'affichage de index.html en fonctio nde si on est connecté ou non
+
 const banner = document.querySelector(".banner")
 
 if  (isConnected() && banner) {

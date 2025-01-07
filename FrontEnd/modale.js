@@ -1,6 +1,8 @@
 let modal = null;
 const modaleContainer = document.getElementById("modale");
 
+// ouverture de la modale
+
 const openModale = function (e) {
     e.preventDefault(e)
     const target = document.querySelector(e.target.getAttribute('href'))
@@ -16,6 +18,8 @@ const openModale = function (e) {
         modalStop.addEventListener('click', stopPropagation);
     });
 }
+
+//fermeture de la modale
 
 const closeModal = function (e) {
     if (modal === null) return;
@@ -36,6 +40,8 @@ const closeModal = function (e) {
     } return
 };
 
+// pour éviter de fermer la modale en cliquant dessus
+
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
@@ -43,6 +49,8 @@ const stopPropagation = function (e) {
 document.querySelectorAll('.js-modal').forEach( a => {
     a.addEventListener('click', openModale)
 })
+
+// gestion des pages
 
 const boutonAjout = document.querySelector('.btn-ajout')
 const page1 = document.querySelector('.page1')

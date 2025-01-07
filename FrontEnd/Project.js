@@ -1,6 +1,3 @@
-
-
-
 let gallery = []; 
 let modal_gallery = []; 
 let category = [];
@@ -15,16 +12,16 @@ async function fetchGalleryData() {
     
 }
 
+// similère à fetchgallerydata
+
 async function fetchCategoryId() {
     const response = await fetch('http://localhost:5678/api/categories');
     const idData = await response.json();
-    console.log("Fetched Categories:", idData); // Debugging Log
     category = idData;
     return idData;
 }
 
-
- // placement de la fonction catégorie data
+// placement de la fonction catégorie data
 
 function categoryButton(idData) {
     const sectionGallery = document.querySelector(".filter-button");
@@ -48,7 +45,6 @@ function categoryButton(idData) {
 
     const allButton = document.createElement("button");
     allButton.innerText = "Tous";
-    allButton.className = "btn-category";
     allButton.addEventListener("click", () => {
         galerieTravaux(gallery); 
     });
@@ -57,8 +53,8 @@ function categoryButton(idData) {
 }
 
 categoryButton(category);
- //placemment de la fonction créatyion bouton
-
+ 
+//genération de la galerie
 
 function galerieTravaux(data) {
     const sectionGallery = document.querySelector(".gallery");
@@ -82,6 +78,7 @@ function galerieTravaux(data) {
     }
 }
 
+//genération de la galerie avec la fonction de supression
 
 function galerieModale(data) {
     const sectionModalGallery = document.querySelector(".modal-gallery");
@@ -106,8 +103,9 @@ function galerieModale(data) {
     });
 }
 
-
 galerieModale(modal_gallery)
+
+// fonction de supression; 
 
 async function handleDeleteClick(id) {
     const confirmation = confirm("Voulez-vous supprimer cet image?");
@@ -129,6 +127,7 @@ async function handleDeleteClick(id) {
     }
 }
 
+// section gérant l'ajout d'image
 
 const fileInput = document.getElementById("file");
 const fileLabel = document.getElementById("file-label");
@@ -139,11 +138,14 @@ const container = document.getElementById("container");
 const fileContainer = document.getElementById("file-container");
 const previewContainer = document.getElementById("preview-container");
 
+    //gestion de la preview
+
 function addSingleFile(event) {
     const file = event.target.files[0]; 
     if (!file) return;
 
     // Validattion
+
     if (!file.type.startsWith("image/")) {
         alert("Veuillez sélectionner un fichier image.");
         return;
@@ -165,6 +167,8 @@ function addSingleFile(event) {
 
 fileInput.addEventListener("change", addSingleFile);
 
+    //formulaire d'envoie
+
 submitButton.addEventListener("click", async function (event) {
     event.preventDefault();
 
@@ -173,6 +177,8 @@ submitButton.addEventListener("click", async function (event) {
     });
 
     let hasError = false;
+
+    // formulaire d'envoie avec les checks d'érreur 
 
     if (!fileInput.files[0]) {
         document.getElementById("file-error").innerText = "Veuillez sélectionner une image.";
@@ -195,6 +201,8 @@ submitButton.addEventListener("click", async function (event) {
     }
 
     if (hasError) return;
+
+    //fonction d'envoie
 
     const formData = new FormData();
     formData.append("image", fileInput.files[0]);
@@ -228,6 +236,7 @@ submitButton.addEventListener("click", async function (event) {
     }
 });
 
+// genération d'affichage de la gallerie et des filtres
 
 document.addEventListener("DOMContentLoaded", async () => {
     const initialData = await fetchGalleryData(); 
