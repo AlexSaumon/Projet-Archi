@@ -26,10 +26,10 @@ if (!isConnected() && modal) {
     modal.classList.replace("js-modal", "item-off")
 }
 
-const filter= document.querySelector(".filter");
+const filter= document.querySelector(".filter-button");
 
 if (isConnected() && filter) {
-    filter.classList.replace("filter", "item-off")
+    filter.classList.replace("filter-button", "item-off")
 }
 
 const login = document.querySelector(".login");
