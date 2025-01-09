@@ -202,6 +202,10 @@ submitButton.addEventListener("click", async function (event) {
 
     if (hasError) return;
 
+    else {
+        submitButton.classList.replace("submit-btn-css-off", "submit-btn-css")
+    }
+
     //fonction d'envoie
 
     const formData = new FormData();
